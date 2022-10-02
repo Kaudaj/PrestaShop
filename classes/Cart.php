@@ -1416,7 +1416,7 @@ class CartCore extends ObjectModel
         $parentSql = 'SELECT
             COALESCE(SUM(first_level_quantity) + SUM(pack_quantity), 0) as deep_quantity,
             COALESCE(SUM(first_level_quantity), 0) as quantity
-          FROM (' . $firstUnionSql . ' UNION ' . $secondUnionSql . ') as q';
+          FROM (' . $firstUnionSql . ' UNION ALL ' . $secondUnionSql . ') as q';
 
         return Db::getInstance()->getRow($parentSql);
     }
@@ -1556,7 +1556,7 @@ class CartCore extends ObjectModel
                 $cartFirstLevelProductQuantity = $this->getProductQuantity(
                     (int) $id_product,
                     (int) $id_product_attribute,
-                    $id_customization
+                    (int) $id_customization
                 );
                 $updateQuantity = '- ' . $quantity;
 

@@ -4340,7 +4340,7 @@ class ProductCore extends ObjectModel
         // we don't substract products in cart if the cart is already attached to an order, since stock quantity
         // has already been updated, this is only useful when the order has not yet been created
         if ($cart && empty(Order::getByCartId($cart->id))) {
-            $cartProduct = $cart->getProductQuantity($idProduct, $idProductAttribute, $idCustomization);
+            $cartProduct = $cart->getProductQuantity($idProduct, $idProductAttribute, false);
 
             if (!empty($cartProduct['deep_quantity'])) {
                 $nbProductInCart = $cartProduct['deep_quantity'];
